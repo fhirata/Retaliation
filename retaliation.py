@@ -132,7 +132,7 @@ JENKINS_NOTIFICATION_UDP_PORT   = 22222
 # The URL of your Jenkins server - used to callback to determine who broke 
 # the build.
 #
-JENKINS_SERVER                  = "http://192.168.1.100:23456"
+# JENKINS_SERVER                  = "http://192.168.1.100:23456"
 
 #
 # If you're Jenkins server is secured by HTTP basic auth, sent the

@@ -143,4 +143,40 @@ command-line as follows:
 
 If you do come up with some other cool uses or ideas for retaliation, please share 
 your story!
+
+### Mac integration
+
+The following change had to be done to core.py in order to get Retaliation working on Python-2.7.x on Mac
         
+<                 and rqtype == util.CTRL_TYPE_STANDARD:
+---
+>                 and rqtype != util.CTRL_TYPE_VENDOR:
+1245,1246c1245
+<
+<     def device_iter(k, v):
+---
+>     def device_iter(**kwargs):
+1249,1257c1248,1249
+<             if  _interop._reduce(
+<                         lambda a, b: a and b,
+<                         map(
+<                             operator.eq,
+<                             v,
+<                             map(lambda i: getattr(d, i), k)
+<                         ),
+<                         True
+<                     ) and (custom_match is None or custom_match(d)):
+---
+>             tests = (val == getattr(d, key) for key, val in kwargs.items())
+>             if _interop._all(tests) and (custom_match is None or custom_match(d)):
+1273,1274d1264
+<     k, v = args.keys(), args.values()
+<
+1276c1266
+<         return device_iter(k, v)
+---
+>         return device_iter(**args)
+1279c1269
+<             return _interop._next(device_iter(k, v))
+---
+>             return _interop._next(device_iter(**args))
