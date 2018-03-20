@@ -148,6 +148,7 @@ your story!
 
 The following change had to be done to core.py in order to get Retaliation working on Python-2.7.x on Mac
         
+```diff
 <                 and rqtype == util.CTRL_TYPE_STANDARD:
 ---
 >                 and rqtype != util.CTRL_TYPE_VENDOR:
@@ -180,3 +181,4 @@ The following change had to be done to core.py in order to get Retaliation worki
 <             return _interop._next(device_iter(k, v))
 ---
 >             return _interop._next(device_iter(**args))
+```
